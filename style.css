@@ -7,25 +7,56 @@ body, html {
   height: 100%;
 }
 
+h1 {
+  font-size: 3rem;
+}
+
 #slides {
   display: flex;
   justify-content: stretch;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
 section {
   box-sizing: border-box;
   padding: 5rem;
   flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .loading section {
   display: none;
 }
 
+.fill {
+  flex: 1;
+  align-self: stretch;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+section .row {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+section .row > * {
+  flex: 1;
+}
+
 section svg {
-  width: 200px;
-  height: 200px;
   border: 1px solid #000;
+  justify-self: stretch;
 }
 
 section svg * {
@@ -37,16 +68,18 @@ section svg .visible {
 }
 
 section .stepsContainer {
-  margin-top: 1em;
+  border-left: 1px solid #DDD;
+  padding-left: 1em;
 }
 
 section .stepsContainer .step {
   display: inline-block;
   padding: 0.2em;
   margin-right: 0.2em;
-  margin-bottom: 0.2em;
+  margin-bottom: 0.1em;
+  margin-top: 0.1em;
   font-size: 1.2em;
-  border: 2px solid #000;
+  border: 2px solid #111;
   opacity: 0.1;
   transition: all ease 0.3s;
 }

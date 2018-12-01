@@ -8,17 +8,18 @@
   </head>
   <body>
     <div id="slides" class="loading">
-      <section class="title">
+      <section class="center">
         <h1>Improving the Procedural Modelling Workflow</h1>
+        <h4>Dave Pagurek</h4>
       </section>
 
-      <section>
+      <section class="center">
         <h1>What is procedural modelling?</h1>
       </section>
 
       <section data-type="2d-example">
         <h2>Let's draw a tree</h2>
-        <steps class="steps">
+        <steps class="row fill">
           <step data-type="transform" data-transform="translate(0, 50)"></step>
           <step data-type="line" data-x1="0" data-y1="0" data-x2="0" data-y2="-50"></step>
           <step data-type="transform" data-transform="translate(0, -50)"></step>
@@ -28,7 +29,7 @@
 
       <section data-type="2d-example">
         <h2>Copy-and-paste that a few times</h2>
-        <steps class="steps">
+        <steps class="row fill">
           <step data-type="transform" data-transform="translate(0, 50)"></step>
           <step data-type="rule" data-name="BRANCH">
             <step data-type="line" data-x1="0" data-y1="0" data-x2="0" data-y2="-50"></step>
@@ -53,6 +54,77 @@
             <step data-type="transform" data-transform="translate(0, -50)"></step>
             <step data-type="circle" data-x="0", data-y="0" data-r="20"></step>
           </step>
+        </steps>
+      </section>
+
+      <section data-type="2d-example">
+        <h2>Let's add multiple branches</h2>
+        <steps class="row fill">
+          <step data-type="transform" data-transform="translate(0, 50)"></step>
+          <step data-type="rule" data-name="BRANCH">
+            <step data-type="line" data-x1="0" data-y1="0" data-x2="0" data-y2="-50"></step>
+            <step data-type="transform" data-transform="translate(0, -50)"></step>
+            <step data-type="circle" data-x="0", data-y="0" data-r="20"></step>
+          </step>
+          <step data-type="transform" data-transform="scale(0.5)"></step>
+
+          <step data-type='push'></step>
+            <step data-type='transform' data-transform='rotate(-30)'></step>
+            <step data-type="rule" data-name="BRANCH">
+              <step data-type="line" data-x1="0" data-y1="0" data-x2="0" data-y2="-50"></step>
+              <step data-type="transform" data-transform="translate(0, -50)"></step>
+              <step data-type="circle" data-x="0", data-y="0" data-r="20"></step>
+            </step>
+            <step data-type="transform" data-transform="scale(0.5)"></step>
+
+            <step data-type='push'></step>
+              <step data-type='transform' data-transform='rotate(-30)'></step>
+              <step data-type="rule" data-name="BRANCH">
+                <step data-type="line" data-x1="0" data-y1="0" data-x2="0" data-y2="-50"></step>
+                <step data-type="transform" data-transform="translate(0, -50)"></step>
+                <step data-type="circle" data-x="0", data-y="0" data-r="20"></step>
+              </step>
+              <step data-type="transform" data-transform="scale(0.5)"></step>
+            <step data-type='pop'></step>
+            <step data-type='push'></step>
+              <step data-type='transform' data-transform='rotate(30)'></step>
+              <step data-type="rule" data-name="BRANCH">
+                <step data-type="line" data-x1="0" data-y1="0" data-x2="0" data-y2="-50"></step>
+                <step data-type="transform" data-transform="translate(0, -50)"></step>
+                <step data-type="circle" data-x="0", data-y="0" data-r="20"></step>
+              </step>
+              <step data-type="transform" data-transform="scale(0.5)"></step>
+            <step data-type='pop'></step>
+
+          <step data-type='pop'></step>
+          <step data-type='push'></step>
+            <step data-type='transform' data-transform='rotate(30)'></step>
+            <step data-type="rule" data-name="BRANCH">
+              <step data-type="line" data-x1="0" data-y1="0" data-x2="0" data-y2="-50"></step>
+              <step data-type="transform" data-transform="translate(0, -50)"></step>
+              <step data-type="circle" data-x="0", data-y="0" data-r="20"></step>
+            </step>
+            <step data-type="transform" data-transform="scale(0.5)"></step>
+
+            <step data-type='push'></step>
+              <step data-type='transform' data-transform='rotate(-30)'></step>
+              <step data-type="rule" data-name="BRANCH">
+                <step data-type="line" data-x1="0" data-y1="0" data-x2="0" data-y2="-50"></step>
+                <step data-type="transform" data-transform="translate(0, -50)"></step>
+                <step data-type="circle" data-x="0", data-y="0" data-r="20"></step>
+              </step>
+              <step data-type="transform" data-transform="scale(0.5)"></step>
+            <step data-type='pop'></step>
+            <step data-type='push'></step>
+              <step data-type='transform' data-transform='rotate(30)'></step>
+              <step data-type="rule" data-name="BRANCH">
+                <step data-type="line" data-x1="0" data-y1="0" data-x2="0" data-y2="-50"></step>
+                <step data-type="transform" data-transform="translate(0, -50)"></step>
+                <step data-type="circle" data-x="0", data-y="0" data-r="20"></step>
+              </step>
+              <step data-type="transform" data-transform="scale(0.5)"></step>
+            <step data-type='pop'></step>
+          <step data-type='pop'></step>
         </steps>
       </section>
 

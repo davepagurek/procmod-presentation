@@ -10,36 +10,51 @@ class Example2D extends window.Slide {
     this.steps = Array.from(stepsNode.children).map(step => this.parseStep(step));
     this.stepTransforms = this.transformsForSteps(this.steps);
 
-    this.svg = this.evaluate(this.steps);
+    const svgContainer = this.evaluate(this.steps);
 
     this.viewport = document.createElementNS(ns, 'path');
     this.viewport.setAttribute('d', 'M-50,-50L-50,50L50,50L50,-50Z M-5,0L5,0 M0,-5L0,5');
 
     this.svg.appendChild(this.viewport);
-    this.stepsText = this.textForSteps(this.steps);
+    const stepsContainer = this.setTextForSteps(this.steps);
 
     const container = document.createElement('div');
-    container.classList.add('container');
-    container.appendChild(this.svg);
+    container.className = stepsNode.className;
+    container.appendChild(svgContainer);
+    container.appendChild(stepsContainer);
 
+    stepsNode.parentElement.replaceChild(container, stepsNode);
+  }
+
+  setTextForSteps(steps) {
     const stepsContainer = document.createElement('div');
     stepsContainer.classList.add('stepsContainer');
 
-    this.stepsText.forEach(step => stepsContainer.appendChild(step));
-    container.appendChild(stepsContainer);
+    const stack = [stepsContainer];
 
-    node.replaceChild(container, stepsNode);
-  }
+    this.stepsText = steps.map((step, i) => {
+      if (step.type === 'pop') {
+        stack.pop();
+      }
 
-  textForSteps(steps) {
-    return steps.map((step, i) => {
       const text = document.createElement('div');
       text.classList.add('step');
       text.innerText = this.display(step);
       text.setAttribute('data-step', i);
+      text.setAttribute('data-type', step.type);
+      stack[stack.length - 1].appendChild(text);
+
+      if (step.type === 'push') {
+        const nested = document.createElement('div');
+        nested.classList.add('stepsContainer');
+        stack[stack.length - 1].appendChild(nested);
+        stack.push(nested);
+      }
 
       return text;
     });
+
+    return stepsContainer;
   }
 
   display(instruction) {
@@ -51,9 +66,9 @@ class Example2D extends window.Slide {
     } else if (instruction.type === 'transform') {
       return instruction.transform;
     } else if (instruction.type === 'push') {
-      return '[';
+      return 'PUSH';
     } else if (instruction.type === 'pop') {
-      return ']';
+      return 'POP';
     } else if (instruction.type === 'rule') {
       return instruction.name;
     }
@@ -140,8 +155,12 @@ class Example2D extends window.Slide {
     svg.appendChild(currentGroup);
 
     const stack = [];
+    const scaleStack = [1];
+    let delay = 0;
 
     const handleInstruction = (instruction, step) => {
+      const scale = scaleStack[scaleStack.length - 1];
+
       if (instruction.type === 'line') {
         const path = document.createElementNS(ns, 'path');
         path.setAttribute('data-step', step);
@@ -149,13 +168,15 @@ class Example2D extends window.Slide {
           `M${instruction.from.x},${instruction.from.y}`,
           `L${instruction.to.x},${instruction.to.y}`
         ].join(' '));
+        currentGroup.appendChild(path);
+
         path.setAttribute('style', this.getStyle({
           stroke: '#000',
-          'stroke-dasharray': 2 * path.getTotalLength(),
-          'stroke-dashoffset': 2 * path.getTotalLength()
+          'stroke-dasharray': 2 * scale * path.getTotalLength(),
+          'stroke-dashoffset': 2 * scale * path.getTotalLength(),
+          'transition-delay': `${delay * 0.3}s`
         }));
-
-        currentGroup.appendChild(path);
+        delay++;
 
       } else if (instruction.type === 'circle') {
         const path = document.createElementNS(ns, 'path');
@@ -165,13 +186,15 @@ class Example2D extends window.Slide {
           `a${instruction.r},${instruction.r} 0 1,0 ${instruction.r * 2},0`,
           `a${instruction.r},${instruction.r} 0 1,0 ${-instruction.r * 2},0`
         ].join(' '));
+        currentGroup.appendChild(path);
+
         path.setAttribute('style', this.getStyle({
           stroke: '#000',
-          'stroke-dasharray': 2 * path.getTotalLength(),
-          'stroke-dashoffset': 2 * path.getTotalLength()
+          'stroke-dasharray': 2 * scale * path.getTotalLength(),
+          'stroke-dashoffset': 2 * scale * path.getTotalLength(),
+          'transition-delay': `${delay * 0.3}s`
         }));
-
-        currentGroup.appendChild(path);
+        delay++;
 
       } else if (instruction.type === 'transform') {
         const g = document.createElementNS(ns, 'g');
@@ -180,20 +203,37 @@ class Example2D extends window.Slide {
         currentGroup.appendChild(g);
         currentGroup = g;
 
+        const match = /scale\(([-\d\.]+)\)/.exec(instruction.transform);
+        if (match) {
+          scaleStack[scaleStack.length - 1] *= parseFloat(match[1]);
+        }
+
       } else if (instruction.type === 'pop') {
         currentGroup = stack.pop();
+        scaleStack.pop();
 
       } else if (instruction.type === 'push') {
         stack.push(currentGroup);
+        scaleStack.push(scale);
 
       } else if (instruction.type === 'rule') {
         instruction.commands.forEach(command => handleInstruction(command, step));
       }
     }
 
-    instructions.forEach(handleInstruction);
+    instructions.forEach((instruction, i) => {
+      delay = 0;
+      handleInstruction(instruction, i);
+    });
 
-    return svg;
+    const svgContainer = document.createElement('div');
+    svgContainer.classList.add('fill');
+    svgContainer.classList.add('center');
+    svgContainer.appendChild(svg);
+
+    this.svg = svg;
+
+    return svgContainer;
   }
 
   show(fromStart) {

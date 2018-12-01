@@ -56,7 +56,7 @@ const state = {
 
   goToSlide(id) {
     this.loadSlide(id);
-    window.history.pushState({slide: id}, `${title} (${id})`, `#${id}`);
+    window.history.replaceState(null, document.title, `#${id}`);
   },
 
   loadSlide(id) {
@@ -102,16 +102,6 @@ window.TYPES = {};
 setTimeout(() => state.initialize(), 0);
 
 const title = 'Improving the Procedural Modelling Workflow';
-
-window.addEventListener('popstate', (event) => {
-  if (event.state) {
-    state.loadSlide(state.slide);
-  } else if (window.location.hash) {
-    state.loadSlide(parseInt(window.location.hash.slice(1)));
-  } else {
-    state.loadSlide(0);
-  }
-});
 
 window.addEventListener('keydown', (event) => {
   if (event.keyCode == 39 || event.keyCode == 40) {
