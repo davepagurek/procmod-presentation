@@ -1,0 +1,23 @@
+body, html {
+  margin: 0;
+  font-size: 1em;
+  font-family: 'EB Garamond', serif;
+  color: #111;
+  width: 100%;
+  height: 100%;
+}
+
+#slides {
+  display: flex;
+  justify-content: stretch;
+}
+
+section {
+  box-sizing: border-box;
+  padding: 5rem;
+  flex: 1;
+}
+
+.loading section {
+  display: none;
+}
