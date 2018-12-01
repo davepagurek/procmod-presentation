@@ -21,3 +21,36 @@ section {
 .loading section {
   display: none;
 }
+
+section svg {
+  width: 200px;
+  height: 200px;
+  border: 1px solid #000;
+}
+
+section svg * {
+  transition: all ease 0.3s;
+}
+
+section svg .visible {
+  stroke-dashoffset: 0 !important;
+}
+
+section .stepsContainer {
+  margin-top: 1em;
+}
+
+section .stepsContainer .step {
+  display: inline-block;
+  padding: 0.2em;
+  margin-right: 0.2em;
+  margin-bottom: 0.2em;
+  font-size: 1.2em;
+  border: 2px solid #000;
+  opacity: 0.1;
+  transition: all ease 0.3s;
+}
+
+section .stepsContainer .step.visible {
+  opacity: 1;
+}
