@@ -7,6 +7,12 @@ body, html {
   height: 100%;
 }
 
+@media all and (max-width: 1000px) {
+  body, html {
+    font-size: 0.7em;
+  }
+}
+
 * {
   transition: all ease 0.3s;
 }
@@ -113,7 +119,7 @@ section .stepsContainer .step {
   transition: all ease 0.3s;
 }
 
-.step.disappearing, span.disappearing {
+.disappearing {
   overflow: hidden;
   box-sizing: border-box;
 }
@@ -130,6 +136,13 @@ span.disappearing.hidden {
 }
 span.disappearing.nospace.hidden {
   margin-right: 0;
+}
+th.disappearing.hidden, td.disappearing.hidden {
+  max-width: 0 !important;
+  max-height: 0 !important;
+  padding: 0 !important;
+  border-width: 0 !important;
+  border-width: 0 !important;
 }
 
 section .stepsContainer .step span.code, span.disappearing {

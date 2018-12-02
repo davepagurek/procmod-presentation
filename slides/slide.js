@@ -19,8 +19,10 @@ class Slide {
         const oldStyle = node.getAttribute('style');
         node.setAttribute('style', 'display: block;');
         const width = child.getBoundingClientRect().width;
-        console.log(node.getBoundingClientRect());
-        child.setAttribute('style', `${style} max-width: ${width}px;`);
+        const height = child.getBoundingClientRect().height;
+        child.setAttribute(
+          'style',
+          `${style} max-width: ${width}px; max-height: ${height}px;`);
         node.setAttribute('style', oldStyle);
       }
     });
@@ -84,7 +86,7 @@ class Slide {
       }
       if (highlight && parseInt(highlight) === this.order) {
         child.classList.add('highlighted');
-      } else {
+      } else if (!child.classList.contains('fixed')) {
         child.classList.remove('highlighted');
       }
     });
