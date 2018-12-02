@@ -7,9 +7,15 @@ body, html {
   height: 100%;
 }
 
-@media all and (max-width: 1000px) {
+@media all and (max-width: 1400px) {
   body, html {
-    font-size: 0.7em;
+    font-size: 0.95em;
+  }
+}
+
+@media all and (max-width: 1200px) {
+  body, html {
+    font-size: 0.8em;
   }
 }
 
@@ -115,7 +121,6 @@ section .stepsContainer .step {
   margin-bottom: 0.3em;
   margin-top: 0.3em;
   font-size: 0.9em;
-  opacity: 0.1;
   transition: all ease 0.3s;
 }
 
@@ -149,8 +154,8 @@ section .stepsContainer .step span.code, span.disappearing {
   display: inline-block;
 }
 
-section .stepsContainer .step.visible {
-  opacity: 1;
+section .stepsContainer .step.visible span.code {
+  background-color: rgba(240,200, 0, 0.6);
 }
 
 td, th {

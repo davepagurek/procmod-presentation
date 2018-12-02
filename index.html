@@ -458,11 +458,11 @@
         <p>Maybe by flattening out the recursive part of the grammar:</p>
         <div class="fill center">
           <table>
-            <tr><th><span class="code">SENTENCE</span></th><td><span class="code">CLAUSE</span> <span class="code">COMPOUND</span></td></tr>
+            <tr><th><span class="code">SENTENCE</span></th><td><span class="code">CLAUSE</span> (<span class="code">COMPOUND</span> | &epsilon;)</td></tr>
 
             <tr data-highlight="0">
               <th><span class="code">COMPOUND</span></th>
-              <td><span class="disappearing nospace" data-order="1">(</span><span class="code">and</span> <span class="code">CLAUSE</span> <span class="disappearing" data-order="1">| &epsilon;)</span> <span class="disappearing" data-order="2">(<span class="code">and</span> <span class="code">CLAUSE</span> | &epsilon;)</span> <span class="disappearing" data-order="3">(<span class="code">and</span> <span class="code">CLAUSE</span> | &epsilon;)</span> <span class="disappearing" data-order="4">(<span class="code">and</span> <span class="code">CLAUSE</span> | &epsilon;)</span></td>
+              <td><span class="code">and</span> <span class="code">CLAUSE</span> <span class="disappearing nospace" data-disappear="1">(<span class="code">COMPOUND</span> | &epsilon;)</span> <span class="disappearing" data-order="2">(<span class="code">and</span> <span class="code">CLAUSE</span> | &epsilon;)</span> <span class="disappearing" data-order="3">(<span class="code">and</span> <span class="code">CLAUSE</span> | &epsilon;)</span> <span class="disappearing" data-order="4">(<span class="code">and</span> <span class="code">CLAUSE</span> | &epsilon;)</span></td>
             </tr>
             <tr><th><span class="code">CLAUSE</span></th><td><span class="code">NOUN</span> <span class="code">VERB_PHRASE</span></td></tr>
             <tr><th><span class="code">VERB_PHRASE</span></th><td><span class="code">VERB</span> (<span class="code">NOUN</span> | &epsilon;)</td></tr>
