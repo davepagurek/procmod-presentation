@@ -9,12 +9,122 @@
   <body>
     <div id="slides" class="loading">
       <section class="center">
-        <h1>Improving the Procedural Modelling Workflow</h1>
+        <h1>Improving the Procedural<br />Modelling Workflow</h1>
         <h4>Dave Pagurek</h4>
       </section>
 
       <section class="center">
         <h1>What is procedural modelling?</h1>
+      </section>
+
+      <section class="aligntop">
+        <h2>It's because of detail</h2>
+        <div class="fill row aligntop">
+          <ul class="fill">
+            <li data-order="1">Adding detail in 2D</li>
+            <ul data-order="1">
+              <li>Some is hidden</li>
+              <li>Can be abstracted</li>
+            </ul>
+            <li data-order="2">Adding detail in 3D</li>
+            <ul data-order="2">
+              <li>Might not be hidden from all angles</li>
+              <li>Need a concrete shape to render</li>
+            </ul>
+          </ul>
+          <div class="fill-double center" data-order="1">
+            <img src="img/mc-trees-large.jpg" />
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>What do you do about it?</h2>
+        <ul>
+          <li>Copy-and-paste?</li>
+          <li>Copy-and-paste, but with random transforms?</li>
+          <li>Copy-and-paste, but with random transforms on individual pieces?</li>
+          <li>Copy-and-paste, but with recursively random pieces?</li>
+        </ul>
+      </section>
+
+      <section class="center">
+        <h2>Sometimes it's easier to describe how to make instances of an object rather than make them all by hand.</h2>
+      </section>
+
+      <section class="center">
+        <h1>Generating from grammars</h1>
+      </section>
+
+      <section class="center">
+        <table>
+          <tr><th>The</th><th>handsome</th><th>author</th><th>disseminated</th><th>knowledge</th><th>from</th><th>his</th><th>expansive</th><th>brain.</th></tr>
+          <tr><td>ARTICLE</td><td>ADJ</td><td>NOUN</td><td rowspan="3">VERB</td><td rowspan="2">NOUN</td><td rowspan="2">PREP</td><td>ADJ</td><td>ADJ</td><td>NOUN</td></tr>
+          <tr><td colspan="3" rowspan="3">NOUN PHRASE</td><td colspan="3">NOUN PHRASE</td></tr>
+          <tr><td colspan="5">NOUN PHRASE</td></tr>
+          <tr><td colspan="6">VERB PHRASE</td></tr>
+          <tr><td colspan="9">CLAUSE</td></tr>
+          <tr><td colspan="9">SENTENCE</td></tr>
+        </table>
+      </section>
+
+      <section class="center">
+        <table>
+          <tr><th>I</th><th>say</th><th>words.</th></tr>
+          <tr><td rowspan="2">NOUN</td><td>VERB</td><td>NOUN</td></tr>
+          <tr><td colspan="2">VERB PHRASE</td></tr>
+          <tr><td colspan="3">CLAUSE</td></tr>
+          <tr><td colspan="3">SENTENCE</td></tr>
+        </table>
+      </section>
+
+      <section>
+        <div class="row fill">
+          <div class="center fill">
+            <table>
+              <tr><th>I</th><th>say</th><th>words.</th></tr>
+              <tr><td rowspan="2">NOUN</td><td>VERB</td><td>NOUN</td></tr>
+              <tr><td colspan="2">VERB PHRASE</td></tr>
+              <tr><td colspan="3">CLAUSE</td></tr>
+              <tr><td colspan="3">SENTENCE</td></tr>
+            </table>
+            <table>
+              <tr><th><span class="code">SENTENCE</span></th><td><span class="code">CLAUSE</span> (<span class="code">COMPOUND</span> | &epsilon;)</td></tr>
+              <tr><th><span class="code">COMPOUND</span></th><td><span class="code">and</span> (<span class="code">CLAUSE</span> | <span class="code">COMPOUND</span>)</td></tr>
+              <tr><th><span class="code">CLAUSE</span></th><td><span class="code">NOUN</span> <span class="code">VERB_PHRASE</span></td></tr>
+              <tr><th><span class="code">VERB_PHRASE</span></th><td><span class="code">VERB</span> (<span class="code">NOUN</span> | &epsilon;)</td></tr>
+              <tr><th><span class="code">NOUN</span></th><td><span class="code">abacus</span> | <span class="code">babboon</span> | <span class="code">cantaloupe</span> | ...</td></tr>
+              <tr><th><span class="code">VERB</span></th><td><span class="code">arrive</span> | <span class="code">bamboozle</span> | <span class="code">capitulate</span> | ...</td></tr>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="row fill">
+          <div class="center fill">
+            <table>
+              <tr><td colspan="7">SENTENCE</td></tr>
+              <tr><td colspan="3">CLAUSE</td><td colspan="4">COMPOUND</td></tr>
+              <tr><td>NOUN</td><td colspan="2">VERB PHRASE</td><th style="vertical-align: bottom" rowspan="4">and</th><td colspan="3">CLAUSE</td></tr>
+              <tr><th style="vertical-align: bottom" rowspan="3">Ants</th><td>VERB</td><td>NOUN</td><td>NOUN</td><td colspan="2">VERB PHRASE</td></tr>
+              <tr><th style="vertical-align: bottom" rowspan="2">cover</th><th style="vertical-align: bottom" rowspan="2">surfaces</th><th style="vertical-align: bottom" rowspan="2">I</th><td>VERB</td><td>NOUN</td></tr>
+              <tr><th style="vertical-align: bottom">raise</th><th style="vertical-align: bottom">concerns.</th></tr>
+            </table>
+            <table>
+              <tr><th><span class="code">SENTENCE</span></th><td><span class="code">CLAUSE</span> (<span class="code">COMPOUND</span> | &epsilon;)</td></tr>
+              <tr><th><span class="code">COMPOUND</span></th><td><span class="code">and</span> (<span class="code">CLAUSE</span> | <span class="code">COMPOUND</span>)</td></tr>
+              <tr><th><span class="code">CLAUSE</span></th><td><span class="code">NOUN</span> <span class="code">VERB_PHRASE</span></td></tr>
+              <tr><th><span class="code">VERB_PHRASE</span></th><td><span class="code">VERB</span> (<span class="code">NOUN</span> | &epsilon;)</td></tr>
+              <tr><th><span class="code">NOUN</span></th><td><span class="code">abacus</span> | <span class="code">babboon</span> | <span class="code">cantaloupe</span> | ...</td></tr>
+              <tr><th><span class="code">VERB</span></th><td><span class="code">arrive</span> | <span class="code">bamboozle</span> | <span class="code">capitulate</span> | ...</td></tr>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="center">
+        <h1>Grammars for constructing shapes</h1>
       </section>
 
       <section data-type="2d-example">
@@ -58,7 +168,7 @@
       </section>
 
       <section data-type="2d-example">
-        <h2>Let's add multiple branches</h2>
+        <h3>Let's add multiple branches</h3>
         <steps class="row fill">
           <step data-type="transform" data-transform="translate(0, 50)"></step>
           <step data-type="rule" data-name="BRANCH">
@@ -128,12 +238,13 @@
         </steps>
       </section>
 
-      <section>
-        <h1>Generating from grammars</h1>
+      <section class="center">
+        <h1>Controlling procedural modelling at the grammar level</h1>
       </section>
     </div>
 
     <script type="text/javascript" src="slides.js"></script>
+    <script type="text/javascript" src="slides/slide.js"></script>
     <script type="text/javascript" src="slides/2d-example.js"></script>
   </body>
 </html>

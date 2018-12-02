@@ -1,28 +1,3 @@
-class Slide {
-  constructor(node) {
-    this.node = node;
-  }
-
-  // Resets the slide state and returns the DOMNode the slide will work in.
-  show(fromStart) {
-    return this.node;
-  }
-
-  // Steps the current slide. Returns `true` if the slide was able
-  // to step itself, and `false` if it had no more steps.
-  increment() {
-    return false;
-  }
-
-  // Steps back the current slide. Returns `true` if the slide was able
-  // to step itself, and `false` if it had no more steps.
-  decrement() {
-    return false;
-  }
-};
-
-window.Slide = Slide;
-
 const state = {
   container: document.getElementById('slides'),
   slides: [],
@@ -37,7 +12,7 @@ const state = {
       if (type) {
         this.slides.push(new window.TYPES[type](child));
       } else {
-        this.slides.push(new Slide(child));
+        this.slides.push(new window.Slide(child));
       }
     });
 
@@ -55,6 +30,13 @@ const state = {
   },
 
   goToSlide(id) {
+    if (id < 0) {
+      id = 0;
+    }
+    if (id >= this.slides.length) {
+      id = this.slides.length - 1;
+    }
+
     this.loadSlide(id);
     window.history.replaceState(null, document.title, `#${id}`);
   },

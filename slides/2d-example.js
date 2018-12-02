@@ -29,6 +29,8 @@ class Example2D extends window.Slide {
   setTextForSteps(steps) {
     const stepsContainer = document.createElement('div');
     stepsContainer.classList.add('stepsContainer');
+    stepsContainer.classList.add('fill');
+    stepsContainer.classList.add('both');
 
     const stack = [stepsContainer];
 
@@ -228,6 +230,7 @@ class Example2D extends window.Slide {
 
     const svgContainer = document.createElement('div');
     svgContainer.classList.add('fill');
+    svgContainer.classList.add('both');
     svgContainer.classList.add('center');
     svgContainer.appendChild(svg);
 
