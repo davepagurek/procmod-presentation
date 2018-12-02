@@ -13,6 +13,16 @@ class Slide {
       if (disappear) {
         this.maxdisappear = Math.max(this.maxdisappear, parseInt(disappear));
       }
+
+      if (child.classList.contains('disappearing')) {
+        const style = child.getAttribute('style') || '';
+        const oldStyle = node.getAttribute('style');
+        node.setAttribute('style', 'display: block;');
+        const width = child.getBoundingClientRect().width;
+        console.log(node.getBoundingClientRect());
+        child.setAttribute('style', `${style} max-width: ${width}px;`);
+        node.setAttribute('style', oldStyle);
+      }
     });
   }
 

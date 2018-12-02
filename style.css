@@ -40,9 +40,10 @@ section {
   flex-direction: column;
 }
 
-img {
+img, svg.expand {
   height: auto;
   max-width: 100%;
+  border: 0;
 }
 
 .loading section {
@@ -113,13 +114,21 @@ section .stepsContainer .step {
 }
 
 .step.disappearing, span.disappearing {
-  max-width: 200px;
   overflow: hidden;
+  box-sizing: border-box;
 }
 
 .step.disappearing.hidden, span.disappearing.hidden {
-  max-width: 0;
+  max-width: 0 !important;
   margin-left: 0;
+}
+.step.disappearing.hidden {
+  margin-right: 0;
+}
+span.disappearing.hidden {
+  margin-right: -0.6em;
+}
+span.disappearing.nospace.hidden {
   margin-right: 0;
 }
 

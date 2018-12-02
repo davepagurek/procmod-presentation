@@ -6,14 +6,14 @@ const state = {
   initialize() {
     // Create slide objects out of the HTML
     Array.from(this.container.children).forEach((child, i) => {
-      this.container.removeChild(child);
-
       const type = child.getAttribute('data-type');
       if (type) {
         this.slides.push(new window.TYPES[type](child));
       } else {
         this.slides.push(new window.Slide(child));
       }
+
+      this.container.removeChild(child);
     });
 
     this.container.classList.remove('loading');
