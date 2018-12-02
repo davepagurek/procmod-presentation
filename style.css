@@ -122,7 +122,17 @@ td, th {
   padding: 0.6em;
   margin: 0;
   vertical-align: top;
-  border: 1px solid #DDD;
+  border-right: 1px solid #DDD;
+  border-bottom: 1px solid #DDD;
+}
+table:not(.appearing) td, table:not(.appearing) th, td.first, th.first {
+  border-left: 1px solid #DDD;
+}
+table:not(.appearing) td, table:not(.appearing) th, tr:first-child td, tr:first-child th {
+  border-top: 1px solid #DDD;
+}
+td.hidden, th.hidden {
+  border-color: rgba(0,0,0,0);
 }
 th {
   font-weight: bold;
@@ -136,9 +146,15 @@ th {
 }
 table {
   border-spacing: 0;
-  border-collapse: collapse;
   margin: 0 auto;
   font-size: inherit;
+}
+table:not(.appearing) {
+  border-collapse: collapse;
+}
+
+table.small {
+  font-size: 0.8em;
 }
 
 span.code {

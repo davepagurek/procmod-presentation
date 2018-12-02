@@ -56,29 +56,36 @@
         <h1>Generating from grammars</h1>
       </section>
 
-      <section class="center">
-        <table>
-          <tr><th>The</th><th>handsome</th><th>author</th><th>disseminated</th><th>knowledge</th><th>from</th><th>his</th><th>expansive</th><th>brain.</th></tr>
-          <tr><td>ARTICLE</td><td>ADJ</td><td>NOUN</td><td rowspan="3">VERB</td><td rowspan="2">NOUN</td><td rowspan="2">PREP</td><td>ADJ</td><td>ADJ</td><td>NOUN</td></tr>
-          <tr><td colspan="3" rowspan="3">NOUN PHRASE</td><td colspan="3">NOUN PHRASE</td></tr>
-          <tr><td colspan="5">NOUN PHRASE</td></tr>
-          <tr><td colspan="6">VERB PHRASE</td></tr>
-          <tr><td colspan="9">CLAUSE</td></tr>
-          <tr><td colspan="9">SENTENCE</td></tr>
-        </table>
-      </section>
-
-      <section class="center">
-        <table>
-          <tr><th>I</th><th>say</th><th>words.</th></tr>
-          <tr><td rowspan="2">NOUN</td><td>VERB</td><td>NOUN</td></tr>
-          <tr><td colspan="2">VERB PHRASE</td></tr>
-          <tr><td colspan="3">CLAUSE</td></tr>
-          <tr><td colspan="3">SENTENCE</td></tr>
-        </table>
+      <section>
+        <h2>Breaking sentences up into trees of grammar rules</h2>
+        <div class="fill center">
+          <table>
+            <tr><th>The</th><th>handsome</th><th>author</th><th>disseminated</th><th>knowledge</th><th>from</th><th>his</th><th>expansive</th><th>brain.</th></tr>
+            <tr><td>ARTICLE</td><td>ADJ</td><td>NOUN</td><td rowspan="3">VERB</td><td rowspan="2">NOUN</td><td rowspan="2">PREP</td><td>ADJ</td><td>ADJ</td><td>NOUN</td></tr>
+            <tr><td colspan="3" rowspan="3">NOUN PHRASE</td><td colspan="3">NOUN PHRASE</td></tr>
+            <tr><td colspan="5">NOUN PHRASE</td></tr>
+            <tr><td colspan="6">VERB PHRASE</td></tr>
+            <tr><td colspan="9">CLAUSE</td></tr>
+            <tr><td colspan="9">SENTENCE</td></tr>
+          </table>
+        </div>
       </section>
 
       <section>
+        <h2>Breaking sentences up into trees of grammar rules</h2>
+        <div class="fill center">
+          <table>
+            <tr><th>I</th><th>say</th><th>words.</th></tr>
+            <tr><td rowspan="2">NOUN</td><td>VERB</td><td>NOUN</td></tr>
+            <tr><td colspan="2">VERB PHRASE</td></tr>
+            <tr><td colspan="3">CLAUSE</td></tr>
+            <tr><td colspan="3">SENTENCE</td></tr>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2>Breaking sentences up into trees of grammar rules</h2>
         <div class="row fill">
           <div class="center fill">
             <table>
@@ -90,9 +97,9 @@
             </table>
             <table>
               <tr><th><span class="code">SENTENCE</span></th><td><span class="code">CLAUSE</span> (<span class="code">COMPOUND</span> | &epsilon;)</td></tr>
-              <tr><th><span class="code">COMPOUND</span></th><td><span class="code">and</span> (<span class="code">CLAUSE</span> | <span class="code">COMPOUND</span>)</td></tr>
-              <tr><th><span class="code">CLAUSE</span></th><td><span class="code">NOUN</span> <span class="code">VERB_PHRASE</span></td></tr>
-              <tr><th><span class="code">VERB_PHRASE</span></th><td><span class="code">VERB</span> (<span class="code">NOUN</span> | &epsilon;)</td></tr>
+              <tr><th><span class="code">COMPOUND</span></th><td><span class="code">and</span> <span class="code">CLAUSE</span> (<span class="code">COMPOUND</span> | &epsilon;)</td></tr>
+              <tr><th><span class="code">CLAUSE</span></th><td><span class="code">NOUN</span> <span class="code">VERB PHRASE</span></td></tr>
+              <tr><th><span class="code">VERB PHRASE</span></th><td><span class="code">VERB</span> (<span class="code">NOUN</span> | &epsilon;)</td></tr>
               <tr><th><span class="code">NOUN</span></th><td><span class="code">abacus</span> | <span class="code">babboon</span> | <span class="code">cantaloupe</span> | ...</td></tr>
               <tr><th><span class="code">VERB</span></th><td><span class="code">arrive</span> | <span class="code">bamboozle</span> | <span class="code">capitulate</span> | ...</td></tr>
             </table>
@@ -100,26 +107,63 @@
         </div>
       </section>
 
-      <section>
+      <section data-type="grammar-gen">
+        <h2>Going the other way, starting from the rules</h2>
         <div class="row fill">
-          <div class="center fill">
-            <table>
-              <tr><td colspan="7">SENTENCE</td></tr>
-              <tr><td colspan="3">CLAUSE</td><td colspan="4">COMPOUND</td></tr>
-              <tr><td>NOUN</td><td colspan="2">VERB PHRASE</td><th style="vertical-align: bottom" rowspan="4">and</th><td colspan="3">CLAUSE</td></tr>
-              <tr><th style="vertical-align: bottom" rowspan="3">Ants</th><td>VERB</td><td>NOUN</td><td>NOUN</td><td colspan="2">VERB PHRASE</td></tr>
-              <tr><th style="vertical-align: bottom" rowspan="2">cover</th><th style="vertical-align: bottom" rowspan="2">surfaces</th><th style="vertical-align: bottom" rowspan="2">I</th><td>VERB</td><td>NOUN</td></tr>
-              <tr><th style="vertical-align: bottom">raise</th><th style="vertical-align: bottom">concerns.</th></tr>
-            </table>
-            <table>
-              <tr><th><span class="code">SENTENCE</span></th><td><span class="code">CLAUSE</span> (<span class="code">COMPOUND</span> | &epsilon;)</td></tr>
-              <tr><th><span class="code">COMPOUND</span></th><td><span class="code">and</span> (<span class="code">CLAUSE</span> | <span class="code">COMPOUND</span>)</td></tr>
-              <tr><th><span class="code">CLAUSE</span></th><td><span class="code">NOUN</span> <span class="code">VERB_PHRASE</span></td></tr>
-              <tr><th><span class="code">VERB_PHRASE</span></th><td><span class="code">VERB</span> (<span class="code">NOUN</span> | &epsilon;)</td></tr>
-              <tr><th><span class="code">NOUN</span></th><td><span class="code">abacus</span> | <span class="code">babboon</span> | <span class="code">cantaloupe</span> | ...</td></tr>
-              <tr><th><span class="code">VERB</span></th><td><span class="code">arrive</span> | <span class="code">bamboozle</span> | <span class="code">capitulate</span> | ...</td></tr>
-            </table>
-          </div>
+          <breakdown>
+            <rule data-type="SENTENCE">
+              <rule data-type="CLAUSE">
+                <rule data-type="NOUN">
+                  <terminal>Ants</terminal>
+                </rule>
+                <rule data-type="VERB PHRASE">
+                  <rule data-type="VERB">
+                    <terminal>cover</terminal>
+                  </rule>
+                  <rule data-type="NOUN">
+                    <terminal>surfaces</terminal>
+                  </rule>
+                </rule>
+              </rule>
+              <rule data-type="COMPOUND">
+                <terminal>and</terminal>
+                <rule data-type="CLAUSE">
+                  <rule data-type="NOUN">
+                    <terminal>I</terminal>
+                  </rule>
+                  <rule data-type="VERB PHRASE">
+                    <rule data-type="VERB">
+                      <terminal>raise</terminal>
+                    </rule>
+                    <rule data-type="NOUN">
+                      <terminal>questions.</terminal>
+                    </rule>
+                  </rule>
+                </rule>
+              </rule>
+            </rule>
+          </breakdown>
+
+          <grammar>
+            <definition data-name="SENTENCE">
+              <div><span class="code">CLAUSE</span> (<span class="code">COMPOUND</span> | &epsilon;)</div>
+            </definition>
+            <definition data-name="COMPOUND">
+              <div><span class="code">and</span> <span class="code">CLAUSE</span> (<span class="code">COMPOUND</span> | &epsilon;)</div>
+            </definition>
+            <definition data-name="CLAUSE">
+              <div><span class="code">NOUN</span> <span class="code">VERB PHRASE</span></div>
+            </definition>
+            <definition data-name="VERB PHRASE">
+              <div><td><span class="code">VERB</span> (<span class="code">NOUN</span> | &epsilon;)</div>
+            </definition>
+            <definition data-name="NOUN">
+              <div><span class="code">abacus</span> | <span class="code">babboon</span> | <span class="code">cantaloupe</span> | ...</div>
+            </definition>
+            <definition data-name="VERB">
+              <div><span class="code">arrive</span> | <span class="code">bamboozle</span> | <span class="code">capitulate</span> | ...</div>
+            </definition>
+          </grammar>
         </div>
       </section>
 
@@ -246,5 +290,6 @@
     <script type="text/javascript" src="slides.js"></script>
     <script type="text/javascript" src="slides/slide.js"></script>
     <script type="text/javascript" src="slides/2d-example.js"></script>
+    <script type="text/javascript" src="slides/grammar-gen.js"></script>
   </body>
 </html>
