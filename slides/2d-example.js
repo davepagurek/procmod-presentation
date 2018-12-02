@@ -41,7 +41,10 @@ class Example2D extends window.Slide {
 
       const text = document.createElement('div');
       text.classList.add('step');
-      text.innerText = this.display(step);
+      const code = document.createElement('span');
+      code.classList.add('code');
+      code.innerText = this.display(step);
+      text.appendChild(code);
       text.setAttribute('data-step', i);
       text.setAttribute('data-type', step.type);
       stack[stack.length - 1].appendChild(text);
@@ -68,9 +71,9 @@ class Example2D extends window.Slide {
     } else if (instruction.type === 'transform') {
       return instruction.transform;
     } else if (instruction.type === 'push') {
-      return 'PUSH';
+      return 'push()';
     } else if (instruction.type === 'pop') {
-      return 'POP';
+      return 'pop()';
     } else if (instruction.type === 'rule') {
       return instruction.name;
     }

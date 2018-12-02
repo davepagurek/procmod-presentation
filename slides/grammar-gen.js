@@ -71,7 +71,11 @@ class GrammarGen extends Slide {
       let cell = null;
       if (ruleNode.nodeName.toLowerCase() === 'terminal') {
         cell = document.createElement('th');
-        cell.innerText = ruleNode.innerText;
+        if (ruleNode.children.length > 0) {
+          Array.from(ruleNode.children).forEach(child => cell.appendChild(child));
+        } else {
+          cell.innerText = ruleNode.innerText;
+        }
         cell.setAttribute('rowspan', maxDepth - depth);
         cell.setAttribute('style', 'vertical-align: bottom');
 

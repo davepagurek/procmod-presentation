@@ -171,14 +171,42 @@
         <h1>Grammars for constructing shapes</h1>
       </section>
 
+      <section>
+        <h2>Generating <em>drawing commands</em> instead of sentences</h2>
+        <ul>
+          <li>Computer reads commands sequentially and executes them</li>
+          <li data-order="1">New terminals we can work with:
+            <ul>
+              <li data-order="2"><span class="code">lineTo(x, y)</span>: Draw a line from the current point to the offset <span class="code">x, y</span></li>
+              <li data-order="3"><span class="code">circle(radius)</span>: Draw a circle with a given radius</li>
+              <li data-order="4"><span class="code">translate(x, y)</span>: Move the paper being drawn on by an offset</li>
+              <li data-order="5"><span class="code">rotate(angle)</span>: Rotate the paper being drawn on</li>
+              <li data-order="6"><span class="code">scale(factor)</span>: Make the paper being drawn on bigger or smaller</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
       <section data-type="2d-example">
-        <h2>Let's draw a tree</h2>
+        <h2>Let's draw a tree with these tools</h2>
         <steps class="row fill">
           <step data-type="transform" data-transform="translate(0, 50)"></step>
           <step data-type="line" data-x1="0" data-y1="0" data-x2="0" data-y2="-50"></step>
           <step data-type="transform" data-transform="translate(0, -50)"></step>
           <step data-type="circle" data-x="0", data-y="0" data-r="20"></step>
         </steps>
+        <p class="hidden">Let's group some things into a rule called <span class="code">BRANCH</span>.</p>
+      </section>
+
+      <section>
+        <h2>Let's draw a tree with these tools</h2>
+        <div class="row fill">
+          <div class="fill both center"><svg width="200" height="200" style="background-color: #FFF" viewBox="0 0 100 100"><g transform="translate(50 50)"><g data-step="0" transform="translate(0, 50)" class="visible"><path data-step="1" d="M0,0 L0,-50" style=" stroke-width: 2; fill: none; vector-effect: non-scaling-stroke; stroke: #000; stroke-dasharray: 100; stroke-dashoffset: 100; transition-delay: 0s;" class="visible"></path><g data-step="2" transform="translate(0, -50)" class="visible"><path data-step="3" d="M-20,0 a20,20 0 1,0 40,0 a20,20 0 1,0 -40,0" style=" stroke-width: 2; fill: none; vector-effect: non-scaling-stroke; stroke: #000; stroke-dasharray: 251.36431884765625; stroke-dashoffset: 251.36431884765625; transition-delay: 0s;" class="visible"></path></g></g></g><path d="M-50,-50L-50,50L50,50L50,-50Z M-5,0L5,0 M0,-5L0,5" style=" stroke-width: 2; fill: none; vector-effect: non-scaling-stroke; stroke: #F00; transform: translate(50px, 50px) translate(0px, 50px) translate(0px, -50px);"></path></svg></div>
+          <div class="stepsContainer fill both">
+            <div class="step visible" data-step="0" data-type="transform"><span class="code">translate(0, 50)</span></div><div class="step visible disappearing" data-order="1" data-step="1" data-type="line"><span class="code">BRANCH</span></div><div class="disappearing step visible" data-disappear="1" data-step="1" data-type="line"><span class="code">lineTo(0, -50)</span></div><div class="disappearing step visible" data-disappear="1" data-step="2" data-type="transform"><span class="code">translate(0, -50)</span></div><div class="disappearing step visible" data-disappear="1" data-step="3" data-type="circle"><span class="code">circle(20)</span></div>
+          </div>
+        </div>
+        <p>Let's group some things into a rule called <span class="code">BRANCH</span>.</p>
       </section>
 
       <section data-type="2d-example">
@@ -211,8 +239,79 @@
         </steps>
       </section>
 
+      <section data-type="grammar-gen">
+        <h2>Writing that as a grammar</h2>
+        <div class="row fill">
+          <breakdown>
+            <rule data-type="TREE">
+              <terminal><span class="code">translate(0, 50)</span></terminal>
+              <rule data-type="NODE">
+                <terminal><span class="code">BRANCH</span></terminal>
+                <rule data-type="SUB BRANCH">
+                  <terminal><span class="code">scale(0.5)</span></terminal>
+                  <rule data-type="NODE">
+                    <terminal><span class="code">BRANCH</span></terminal>
+                    <rule data-type="SUB BRANCH">
+                      <terminal>...</terminal>
+                    </rule>
+                  </rule>
+                </rule>
+              </rule>
+            </rule>
+          </breakdown>
+
+          <grammar>
+            <definition data-name="TREE">
+              <div><span class="code">translate(0, 50)</span> <span class="code">NODE</span></div>
+            </definition>
+            <definition data-name="NODE">
+              <div><span class="code">BRANCH</span> (<span class="code">SUB BRANCH</span> | &epsilon;)</div>
+            </definition>
+            <definition data-name="SUB BRANCH">
+              <div><span class="code">scale(0.5)</span> <span class="code">NODE</span></div>
+            </definition>
+            <definition data-name="BRANCH">
+              <div><span class="code">lineTo(0, -50)</span> <span class="code">translate(0, -50)</span> <span class="code">circle(20)</span></div>
+            </definition>
+          </grammar>
+        </div>
+      </section>
+
+      <section>
+        <h2>How would we do multiple branches?</h2>
+        <ul>
+          <li>We would need to unwind the transformations we made</li>
+          <li data-order="1">Alternatively, we can add some new tools:
+            <ul>
+              <li data-order="2"><span class="code">push()</span>: Remember the position, rotation, and scale of the paper by adding it to a stack of saved orientations</li>
+              <li data-order="3"><span class="code">pop()</span>: Take the last saved paper orientation from the stack and restore it</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Updating the grammar to have two branches</h2>
+        <div class="fill center">
+          <table>
+            <tr>
+              <th><span class="code">TREE</span></th><td><span class="code">translate(0, 50)</span> <span class="code">NODE</span></td>
+            </tr>
+            <tr>
+              <th><span class="code">NODE</span></th><td><span class="code">BRANCH</span> (<span class="code disappearing" data-disappear="1">SUB BRANCH</span><span class="code disappearing" data-order="1" data-highlight="1">SUB BRANCHES</span> | &epsilon;)</td>
+            </tr>
+            <tr>
+              <th><span class="code disappearing" data-disappear="1">SUB BRANCH</span> <span class="code disappearing" data-order="1" data-highlight="1">SUB BRANCHES</span></th>
+              <td><span class="code">scale(0.5)</span> <span class="code disappearing" data-disappear="2">NODE</span> <span class="code disappearing" data-order="3" data-highlight="3">push()</span> <span class="code disappearing" data-order="3" data-highlight="3">rotate(-30)</span> <span class="code disappearing" data-order="3" data-highlight="3">NODE</span> <span class="code disappearing" data-order="3" data-highlight="3">pop()</span> <span class="code disappearing" data-order="4" data-highlight="4">push()</span> <span class="code disappearing" data-order="4" data-highlight="4">rotate(30)</span> <span class="code disappearing" data-order="4" data-highlight="4">NODE</span> <span class="code disappearing" data-order="4" data-highlight="4">pop()</span></td>
+            </tr>
+            <tr>
+              <th><span class="code">BRANCH</span></th><td><span class="code">lineTo(0, -50)</span> <span class="code">translate(0, -50)</span> <span class="code">circle(30)</span></td>
+            </tr>
+          </table>
+        </div>
+      </section>
+
       <section data-type="2d-example">
-        <h3>Let's add multiple branches</h3>
         <steps class="row fill">
           <step data-type="transform" data-transform="translate(0, 50)"></step>
           <step data-type="rule" data-name="BRANCH">

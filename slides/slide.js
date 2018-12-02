@@ -8,6 +8,11 @@ class Slide {
       if (order) {
         this.maxOrder = Math.max(this.maxOrder, parseInt(order));
       }
+
+      const disappear = child.getAttribute('data-disappear');
+      if (disappear) {
+        this.maxdisappear = Math.max(this.maxdisappear, parseInt(disappear));
+      }
     });
   }
 
@@ -54,12 +59,23 @@ class Slide {
   update() {
     Array.from(this.node.querySelectorAll('*')).forEach(child => {
       const order = child.getAttribute('data-order');
-      if (order) {
-        if (parseInt(order) <= this.order) {
-          child.classList.remove('hidden');
+      const disappear = child.getAttribute('data-disappear');
+      const highlight = child.getAttribute('data-highlight');
+      if (order || disappear) {
+        if (!order || parseInt(order) <= this.order) {
+          if (!disappear || disappear > this.order) {
+            child.classList.remove('hidden');
+          } else {
+            child.classList.add('hidden');
+          }
         } else {
           child.classList.add('hidden');
         }
+      }
+      if (highlight && parseInt(highlight) === this.order) {
+        child.classList.add('highlighted');
+      } else {
+        child.classList.remove('highlighted');
       }
     });
   }
