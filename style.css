@@ -104,6 +104,7 @@ section .stepsContainer {
 
 section .stepsContainer .step {
   display: inline-block;
+  vertical-align: middle;
   margin-right: 0.3em;
   margin-bottom: 0.3em;
   margin-top: 0.3em;
