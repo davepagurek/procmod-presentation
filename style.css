@@ -41,7 +41,6 @@ section {
 }
 
 img {
-  width: 100%;
   height: auto;
   max-width: 100%;
 }
@@ -113,18 +112,18 @@ section .stepsContainer .step {
   transition: all ease 0.3s;
 }
 
-.step.disappearing, .code.disappearing {
+.step.disappearing, span.disappearing {
   max-width: 200px;
   overflow: hidden;
 }
 
-.step.disappearing.hidden, .code.disappearing.hidden {
+.step.disappearing.hidden, span.disappearing.hidden {
   max-width: 0;
   margin-left: 0;
   margin-right: 0;
 }
 
-section .stepsContainer .step span.code {
+section .stepsContainer .step span.code, span.disappearing {
   display: inline-block;
 }
 
@@ -193,7 +192,7 @@ span.code.highlighted {
   background-color: rgba(240,200, 0, 0.6);
 }
 
-.disappearing span.code, .code.disappearing {
+.disappearing span.code, span.disappearing {
   white-space: nowrap;
 }
 

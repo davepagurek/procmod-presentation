@@ -381,8 +381,95 @@
         </steps>
       </section>
 
+      <section>
+        <h2>Some examples</h2>
+        <div class="row" style="padding-top: 2em; padding-bottom: 2em;">
+          <div class="center fill">
+            <img style="border: 2px solid #000; width: 200px; height: 200px;" src="img/tree1.svg" />
+          </div>
+
+          <div class="center fill">
+            <img style="border: 2px solid #000; width: 200px; height: 200px;" src="img/tree2.svg" />
+          </div>
+          <div class="center fill">
+            <img style="border: 2px solid #000; width: 200px; height: 200px;" src="img/tree3.svg" />
+          </div>
+
+          <div class="center fill">
+            <img style="border: 2px solid #000; width: 200px; height: 200px;" src="img/tree4.svg" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="fill center"></div>
+          <div class="fill center"></div>
+          <div class="fill center" data-order="1">
+            <p align="center">It would be nice to get rid of weird results like this one.</p>
+          </div>
+          <div class="fill center"></div>
+        </div>
+      </section>
+
       <section class="center">
         <h1>Controlling procedural modelling at the grammar level</h1>
+        <p>Trying to make foolproof instructions</p>
+      </section>
+
+      <section>
+        <h2>How do you keep good results but prevent bad ones like this?</h2>
+        <div class="fill center">
+          <table>
+            <tr>
+              <th>The years keep coming</th><th rowspan="5">and</th><th>they don't stop coming</th><th rowspan="4">and</th><th>they don't stop coming</th><th rowspan="3">and</th><th>they don't stop coming</th><th rowspan="2">and</th><th>they don't stop coming</th>
+            </tr>
+            <tr><td rowspan="5">CLAUSE</td><td rowspan="4">CLAUSE</td><td rowspan="3">CLAUSE</td><td rowspan="2">CLAUSE</td><td>CLAUSE</td></tr>
+            <tr><td colspan="2">COMPOUND</td></tr>
+            <tr><td colspan="4">COMPOUND</td></tr>
+            <tr><td colspan="6">COMPOUND</td></tr>
+            <tr><td colspan="8">COMPOUND</td></tr>
+            <tr><td colspan="9">SENTENCE</td></tr>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2>How to stop at 4 chained clauses?</h2>
+        <p>Maybe by flattening out the recursive part of the grammar:</p>
+        <div class="fill center">
+          <table>
+            <tr><th><span class="code">SENTENCE</span></th><td><span class="code">CLAUSE</span> <span class="code">COMPOUND</span></td></tr>
+
+            <tr data-highlight="0">
+              <th><span class="code">COMPOUND</span></th>
+              <td><span class="disappearing" data-order="1">(</span><span class="code">and</span> <span class="code">CLAUSE</span><span class="disappearing" data-order="1"> | &epsilon;)</span> <span class="disappearing" data-order="2">(<span class="code">and</span> <span class="code">CLAUSE</span> | &epsilon;)</span> <span class="disappearing" data-order="3">(<span class="code">and</span> <span class="code">CLAUSE</span> | &epsilon;)</span> <span class="disappearing" data-order="4">(<span class="code">and</span> <span class="code">CLAUSE</span> | &epsilon;)</span></td>
+            </tr>
+            <tr><th><span class="code">CLAUSE</span></th><td><span class="code">NOUN</span> <span class="code">VERB_PHRASE</span></td></tr>
+            <tr><th><span class="code">VERB_PHRASE</span></th><td><span class="code">VERB</span> (<span class="code">NOUN</span> | &epsilon;)</td></tr>
+            <tr><th><span class="code">NOUN</span></th><td><span class="code">abacus</span> | <span class="code">babboon</span> | <span class="code">cantaloupe</span> | ...</td></tr>
+            <tr><th><span class="code">VERB</span></th><td><span class="code">arrive</span> | <span class="code">bamboozle</span> | <span class="code">capitulate</span> | ...</td></tr>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2>Still has limitations</h2>
+        <ul>
+          <li>If you want a bigger number, this gets annoying</li>
+          <li>What if you want to restrict between depths <em>a</em> and <em>b</em>?</li>
+          <li>You can do it, but you need to be clever and you end up with a lot of manual work</li>
+        </ul>
+      </section>
+
+      <section class="center">
+        <h1>Controlling procedural modelling using search</h1>
+        <p>When it becomes easier to specify how good a result is than to specify how to only make good results</p>
+      </section>
+
+      <section>
+        <h2>Specifying what "good" means</h2>
+        <p>One way is to compare a result against a target silhouette:</p>
+        <div class="fill center">
+          <img width="800" src="img/silhouettes.png" />
+        </div>
       </section>
     </div>
 
