@@ -44,7 +44,7 @@
           <li>Copy-and-paste?</li>
           <li>Copy-and-paste, but with random transforms?</li>
           <li>Copy-and-paste, but with random transforms on individual pieces?</li>
-          <li>Copy-and-paste, but with recursively random pieces?</li>
+          <li>Copy-and-paste, but with a tree of random pieces?</li>
         </ul>
       </section>
 
@@ -177,10 +177,10 @@
           <li>Computer reads commands sequentially and executes them</li>
           <li data-order="1">New terminals we can work with:
             <ul>
-              <li data-order="2"><span class="code">lineTo(x, y)</span>: Draw a line from the current point to the offset <span class="code">x, y</span></li>
-              <li data-order="3"><span class="code">circle(radius)</span>: Draw a circle with a given radius</li>
-              <li data-order="4"><span class="code">translate(x, y)</span>: Move the paper being drawn on by an offset</li>
-              <li data-order="5"><span class="code">rotate(angle)</span>: Rotate the paper being drawn on</li>
+              <li data-order="2"><span class="code">lineTo(x, y)</span>: Draw a line from the current location of the "pen" to the offset <span class="code">x, y</span></li>
+              <li data-order="3"><span class="code">circle(radius)</span>: Draw a circle with a given radius, centered at the pen's location</li>
+              <li data-order="4"><span class="code">translate(x, y)</span>: Move the location of the pen by an offset</li>
+              <li data-order="5"><span class="code">rotate(angle)</span>: Rotate the paper being drawn on about the pen's location</li>
               <li data-order="6"><span class="code">scale(factor)</span>: Make the paper being drawn on bigger or smaller</li>
             </ul>
           </li>
