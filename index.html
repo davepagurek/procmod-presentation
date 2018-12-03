@@ -806,6 +806,154 @@
           </svg>
         </div>
       </section>
+
+      <section class="center">
+        <h1>Better score functions</h1>
+      </section>
+
+      <section>
+        <h2>Scoring for 3D</h2>
+        <ul>
+          <li>Silhouette matching is slow (~40s with a 100x100 target silhouette)
+            <ul><li>Using a 2D silhouette target means rendering the 3D object to a silhouette, which is expensive</li></ul>
+          </li>
+          <li data-order="1">A 2D silhouette would only specify the view from one angle anyway
+            <ul>
+              <li>A 3D target volume would address this, but is also expensive</li>
+              <li>Also it's a lot of effort to make a target volume</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Properties of a good score function</h2>
+        <ul>
+          <li data-order="1"><strong>Easy for an artist to specify.</strong> They shouldn't have to create detailed 3D models to use the score function.</li>
+          <li data-order="2"><strong>A variety of models should be able to score highly.</strong> We want some amount of variation in resulting models, otherwise we wouldn't be using procedural modelling.</li>
+          <li data-order="3"><strong>Works well for 3D.</strong></li>
+          <li data-order="4"><strong>Score for a subtree should add to the model's total score.</strong> This lets us use SMC to save computation time.</li>
+          <li data-order="5"><strong>Computationally inexpensive.</strong> It should be able to run at interactive rates.
+            <ul>
+              <li>When it takes more than a second or two to run, artists think before running the tool</li>
+              <li>With a tighter feedback loop, artists can think <em>with</em> the tool through interactive experimentation</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>My solution: Model skeletons</h2>
+        <ul>
+          <li>The thing that makes the other methods slow is the fact that they operate on geometry</li>
+          <li data-order="1">Instead, let's operate on the model's <em>skeleton:</em>
+            <ul>
+              <li data-order="2">Every time we encounter a <span class="code">push()</span>, add a point to the skeleton</li>
+              <li data-order="2">Connect that point to the last point from the <span class="code">push()</span> stack</li>
+              <li data-order="2">Each "bone" in the skeleton is just 2 points, which is cheap to operate on</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Model skeleton examples</h2>
+        <div class="row fill">
+          <div class="fill center">
+            <img width="300" src="img/tree-no-bones.jpg" />
+          </div>
+          <div class="fill center">
+            <img width="300" src="img/cathedral-no-bones.jpg" />
+          </div>
+        </div>
+        <div class="row fill">
+          <div class="fill center">
+            <img width="300" src="img/tree-bones.jpg" />
+          </div>
+          <div class="fill center">
+            <img width="300" src="img/cathedral-bones.jpg" />
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Guiding curves</h2>
+        <ul>
+          <li>Artists sketch curves as guides, and then the skeleton is compared to them.</li>
+          <li data-order="1">Score is based on:
+            <ol>
+              <li data-order="1"><strong>Alignment:</strong> bones score higher for being closer to the direction of the closest curve</li>
+              <li data-order="2"><strong>Distance:</strong> bones score higher for being closer to guides</li>
+            </ol>
+          </li>
+          <li data-order="3">This can take under 200ms to run</li>
+        </ul>
+        <div class="fill center">
+          <img data-order="4" src="img/tree-examples.jpg" />
+        </div>
+      </section>
+
+      <section>
+        <h2>Alignment</h2>
+        <div class="fill center">
+          <img width="600" src="img/cost_function_diagram-large.jpg" />
+        </div>
+      </section>
+
+      <section>
+        <h2>Distance</h2>
+        <div class="fill center">
+          <img width="600" src="img/vectorfield.png" />
+        </div>
+      </section>
+
+      <section>
+        <h2>What it's like to use</h2>
+        <div class="fill center">
+          <img width="500" src="img/curves.gif" />
+        </div>
+      </section>
+
+      <section>
+        <h2>Editing environment</h2>
+        <p>Split-screen with grammar and curves</p>
+        <div class="fill center">
+          <img width="700" src="img/editor.png" />
+        </div>
+      </section>
+
+      <section>
+        <h2>What can you make with it?</h2>
+        <div class="fill center">
+          <img width="800" src="img/tree-large.jpg" />
+        </div>
+      </section>
+
+      <section>
+        <h2>What can you make with it?</h2>
+        <div class="fill center">
+          <img width="800" src="img/cathedral-large.jpg" />
+        </div>
+      </section>
+
+      <section>
+        <h2>What's next for this project?</h2>
+        <ul>
+          <li>This is mostly proof-of-concept right now, could be added to a real modelling program</li>
+          <li data-order="1">Could add better support for volumes and areas
+            <ul>
+              <li>Give guides a thickness where growth is uniformly encouraged</li>
+              <li>Could also add target density within/around the guide</li>
+            </ul>
+          </li>
+          <li data-order="2">This still requires you to write a grammar, which is not easy
+            <ul>
+              <li>A GUI tool where grammar rules are components that can be combined would be useful</li>
+              <li>Would also be good to visualize the distribution of results every time any randomization/choice is added to a rule</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
     </div>
 
     <script type="text/javascript" src="slides.js"></script>
