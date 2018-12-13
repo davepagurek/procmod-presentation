@@ -526,7 +526,7 @@
       <section>
         <h2>Result images as probabilistic samples</h2>
         <p>The probability of a specific sample being picked depends on the choices the grammar made when generating it.</p>
-        <ol>
+        <ol class="disappearing" data-disappear="4">
           <li data-order="1"><strong>Every time a | is used, the probability is multiplied by 0.5</strong> because half the time it generates one option, and the other half of the time, it generates the other
             <ul>
               <li data-order="2">Our grammar makes one choice for every branch after the first one, and our ideal tree has eight</li>
@@ -534,23 +534,15 @@
             </ul>
           </li>
         </ol>
-      </section>
-      <section>
-        <h2>Result images as probabilistic samples</h2>
-        <p>The probability of a specific sample being picked depends on the choices the grammar made when generating it.</p>
-        <ol start="2">
-          <li data-order="1">As an approximation, <strong>every time <span class="code">random(a, b)</span> is used, the probability is multiplied by 0.1</strong> if we make the (generous) assumption that it picks one of 10 values between <span class="code">a</span> and <span class="code">b</span> and not a continuous number
+        <ol start="2" class="disappearing" data-order="4" data-disappear="7">
+          <li data-order="4">As an approximation, <strong>every time <span class="code">random(a, b)</span> is used, the probability is multiplied by 0.1</strong> if we make the (generous) assumption that it picks one of 10 values between <span class="code">a</span> and <span class="code">b</span> and not a continuous number
             <ul>
-              <li data-order="2">Each branch makes two of these calls, and we have eight</li>
-              <li data-order="3">The probability gets multiplied by (0.1 &times; 0.1)<sup>8</sup> = 1 &times; 10<sup>-16</sup></li>
+              <li data-order="5">Each branch makes two of these calls, and we have eight</li>
+              <li data-order="6">The probability gets multiplied by (0.1 &times; 0.1)<sup>8</sup> = 1 &times; 10<sup>-16</sup></li>
             </ul>
           </li>
         </ol>
-      </section>
-      <section>
-        <h2>Result images as probabilistic samples</h2>
-        <p>The probability of a specific sample being picked depends on the choices the grammar made when generating it.</p>
-        <p data-order="1">Altogether, that's around 3.9 &times; 10<sup>-19</sup></p>
+        <p class="disappearing" data-order="7">Altogether, that's around 3.9 &times; 10<sup>-19</sup></p>
       </section>
 
       <section>

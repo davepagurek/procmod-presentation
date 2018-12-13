@@ -134,6 +134,9 @@ section .stepsContainer .step {
 }
 
 ul.disappearing.hidden, ol.disappearing.hidden, p.disappearing.hidden {
+  max-height: 90vh !important;
+}
+ul.disappearing.hidden, ol.disappearing.hidden, p.disappearing.hidden {
   margin: 0;
   max-height: 0 !important;
 }
