@@ -10,7 +10,8 @@
     <div id="slides" class="loading">
       <section class="center">
         <h1>Improving the Procedural<br />Modelling Workflow</h1>
-        <h4>Dave Pagurek</h4>
+        <p><em>or: A Tour of How Dave Spends Free Time</em></p>
+        <h4>by Dave Pagurek</h4>
       </section>
 
       <section class="center">
@@ -203,7 +204,7 @@
         <div class="row fill">
           <div class="fill both center"><svg width="200" height="200" style="background-color: #FFF" viewBox="0 0 100 100"><g transform="translate(50 50)"><g data-step="0" transform="translate(0, 50)" class="visible"><path data-step="1" d="M0,0 L0,-50" style=" stroke-width: 2; fill: none; vector-effect: non-scaling-stroke; stroke: #000; stroke-dasharray: 100; stroke-dashoffset: 100; transition-delay: 0s;" class="visible"></path><g data-step="2" transform="translate(0, -50)" class="visible"><path data-step="3" d="M-20,0 a20,20 0 1,0 40,0 a20,20 0 1,0 -40,0" style=" stroke-width: 2; fill: none; vector-effect: non-scaling-stroke; stroke: #000; stroke-dasharray: 251.36431884765625; stroke-dashoffset: 251.36431884765625; transition-delay: 0s;" class="visible"></path></g></g></g><path d="M-50,-50L-50,50L50,50L50,-50Z M-5,0L5,0 M0,-5L0,5" style=" stroke-width: 2; fill: none; vector-effect: non-scaling-stroke; stroke: #F00; transform: translate(50px, 50px) translate(0px, 50px) translate(0px, -50px);"></path></svg></div>
           <div class="stepsContainer fill both">
-            <div class="step visible" data-step="0" data-type="transform"><span class="code">translate(0, 50)</span></div><div class="step visible disappearing" data-order="1" data-step="1" data-type="line"><span class="code">BRANCH</span></div><div class="disappearing step visible" data-disappear="1" data-step="1" data-type="line"><span class="code">lineTo(0, -50)</span></div><div class="disappearing step visible" data-disappear="1" data-step="2" data-type="transform"><span class="code">translate(0, -50)</span></div><div class="disappearing step visible" data-disappear="1" data-step="3" data-type="circle"><span class="code">circle(20)</span></div>
+            <div class="step visible no-animation" data-step="0" data-type="transform"><span class="code">translate(0, 50)</span></div><div class="step visible no-animation disappearing" data-order="1" data-step="1" data-type="line"><span class="code">BRANCH</span></div><div class="disappearing step visible no-animation" data-disappear="1" data-step="1" data-type="line"><span class="code">lineTo(0, -50)</span></div><div class="disappearing step visible no-animation" data-disappear="1" data-step="2" data-type="transform"><span class="code">translate(0, -50)</span></div><div class="disappearing step visible no-animation" data-disappear="1" data-step="3" data-type="circle"><span class="code">circle(20)</span></div>
           </div>
         </div>
         <p>Let's group some things into a rule called <span class="code">BRANCH</span>.</p>
@@ -432,7 +433,7 @@
       </section>
 
       <section class="center">
-        <h1>Controlling procedural modelling at the grammar level</h1>
+        <h1>Controlling procedural modelling<br />at the grammar level</h1>
         <p>Trying to make foolproof instructions</p>
       </section>
 
@@ -482,8 +483,8 @@
       </section>
 
       <section class="center">
-        <h1>Controlling procedural modelling using search</h1>
-        <p>When it becomes easier to specify how good a result is than to specify how to only make good results</p>
+        <h1>Controlling procedural<br />modelling using search</h1>
+        <p align="center">When it becomes easier to specify how good a result is than<br />to specify how to only make good results</p>
       </section>
 
       <section>
@@ -840,12 +841,8 @@
         <ul>
           <li data-order="1"><strong>Easy for an artist to specify.</strong> They shouldn't have to create detailed 3D models to use the score function.</li>
           <li data-order="2"><strong>A variety of models should be able to score highly.</strong> We want some amount of variation in resulting models, otherwise we wouldn't be using procedural modelling.</li>
-          <li data-order="3"><strong>Computationally inexpensive.</strong> It should be able to run at interactive rates.
-            <ul>
-              <li>When it takes more than a second or two to run, artists think before running the tool</li>
-              <li>With a tighter feedback loop, artists can think <em>with</em> the tool through interactive experimentation</li>
-            </ul>
-          </li>
+          <li data-order="3"><strong>Computationally inexpensive.</strong> It should be able to run at interactive rates.</li>
+          <li data-order="4"><strong>All the detail is relevant.</strong> The signal-per-effort ratio should be high, for the artist's sanity and for the algorithm to be more effective.</li>
         </ul>
       </section>
 
@@ -885,19 +882,19 @@
 
       <section>
         <h2>Guiding curves</h2>
+        <div class="center">
+          <img src="img/tree-examples.jpg" />
+        </div>
         <ul>
           <li>Artists sketch curves as guides, and then the skeleton is compared to them.</li>
           <li data-order="1">Score is based on:
             <ol>
-              <li data-order="1"><strong>Alignment:</strong> bones score higher for being closer to the direction of the closest curve</li>
-              <li data-order="2"><strong>Distance:</strong> bones score higher for being closer to guides</li>
+              <li><strong>Alignment:</strong> bones score higher for being closer to the direction of the closest curve</li>
+              <li><strong>Distance:</strong> bones score higher for being closer to guides</li>
             </ol>
           </li>
-          <li data-order="3">This can take under 200ms to run</li>
+          <li data-order="2">This can take under 200ms to run</li>
         </ul>
-        <div class="fill center">
-          <img data-order="4" src="img/tree-examples.jpg" />
-        </div>
       </section>
 
       <section>
@@ -959,6 +956,7 @@
               <li>Would also be good to visualize the distribution of results every time any randomization/choice is added to a rule</li>
             </ul>
           </li>
+          <li data-order="3">NEED TO FINISH EDITING THE PAPER FOR WEDNESDAY, WISH ME LUCK &#x1F64F;</li>
         </ul>
       </section>
 

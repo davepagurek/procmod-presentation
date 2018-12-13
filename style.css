@@ -168,6 +168,13 @@ section .stepsContainer .step span.code, span.disappearing {
 
 section .stepsContainer .step.visible span.code {
   background-color: rgba(240,200, 0, 0.6);
+  animation-name: bounce;
+  animation-duration: 0.5s;
+  animation-fill-mode: both;
+}
+
+section .stepsContainer .step.visible.no-animation span.code {
+  animation: none;
 }
 
 td, th {
@@ -240,4 +247,14 @@ span.code.highlighted {
 li {
   margin-top: 0.3em;
   margin-bottom: 0.3em;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: scale(1);
+  }
+
+  30% {
+    transform: scale(1.4);
+  }
 }
