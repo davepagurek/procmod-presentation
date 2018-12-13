@@ -33,7 +33,7 @@
             </ul>
           </ul>
           <div class="fill-double center" data-order="1">
-            <img src="img/mc-trees-large.jpg" />
+            <img width="80%" src="img/mc-trees-large.jpg" />
           </div>
         </div>
       </section>
@@ -533,14 +533,24 @@
               <li data-order="3">The probability gets multiplied by 0.5<sup>8</sup> = 0.00390625</li>
             </ul>
           </li>
-          <li data-order="4">As an approximation, <strong>every time <span class="code">random(a, b)</span> is used, the probability is multiplied by 0.1</strong> if we make the (generous) assumption that it picks one of 10 values between <span class="code">a</span> and <span class="code">b</span> and not a continuous number
+        </ol>
+      </section>
+      <section>
+        <h2>Result images as probabilistic samples</h2>
+        <p>The probability of a specific sample being picked depends on the choices the grammar made when generating it.</p>
+        <ol start="2">
+          <li data-order="1">As an approximation, <strong>every time <span class="code">random(a, b)</span> is used, the probability is multiplied by 0.1</strong> if we make the (generous) assumption that it picks one of 10 values between <span class="code">a</span> and <span class="code">b</span> and not a continuous number
             <ul>
-              <li data-order="5">Each branch makes two of these calls, and we have eight</li>
-              <li data-order="6">The probability gets multiplied by (0.1 &times; 0.1)<sup>8</sup> = 1 &times; 10<sup>-16</sup></li>
+              <li data-order="2">Each branch makes two of these calls, and we have eight</li>
+              <li data-order="3">The probability gets multiplied by (0.1 &times; 0.1)<sup>8</sup> = 1 &times; 10<sup>-16</sup></li>
             </ul>
           </li>
         </ol>
-        <p data-order="7">Altogether, that's around 3.9 &times; 10<sup>-19</sup></p>
+      </section>
+      <section>
+        <h2>Result images as probabilistic samples</h2>
+        <p>The probability of a specific sample being picked depends on the choices the grammar made when generating it.</p>
+        <p data-order="1">Altogether, that's around 3.9 &times; 10<sup>-19</sup></p>
       </section>
 
       <section>
@@ -635,7 +645,7 @@
       </section>
 
       <section>
-        <h2>In the contxt of images</h2>
+        <h2>In the context of images</h2>
         <p>Usually means replacing a part of the image with another</p>
         <div class="center fill">
           <img src="img/subtree-replacement.png" />
@@ -837,9 +847,7 @@
         <ul>
           <li data-order="1"><strong>Easy for an artist to specify.</strong> They shouldn't have to create detailed 3D models to use the score function.</li>
           <li data-order="2"><strong>A variety of models should be able to score highly.</strong> We want some amount of variation in resulting models, otherwise we wouldn't be using procedural modelling.</li>
-          <li data-order="3"><strong>Works well for 3D.</strong></li>
-          <li data-order="4"><strong>Score for a subtree should add to the model's total score.</strong> This lets us use SMC to save computation time.</li>
-          <li data-order="5"><strong>Computationally inexpensive.</strong> It should be able to run at interactive rates.
+          <li data-order="3"><strong>Computationally inexpensive.</strong> It should be able to run at interactive rates.
             <ul>
               <li>When it takes more than a second or two to run, artists think before running the tool</li>
               <li>With a tighter feedback loop, artists can think <em>with</em> the tool through interactive experimentation</li>

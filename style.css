@@ -7,6 +7,10 @@ body, html {
   height: 100%;
 }
 
+p, li {
+  font-size: 2rem;
+}
+
 @media all and (max-width: 1400px) {
   body, html {
     font-size: 0.95em;
@@ -129,6 +133,10 @@ section .stepsContainer .step {
   box-sizing: border-box;
 }
 
+ul.disappearing.hidden, ol.disappearing.hidden, p.disappearing.hidden {
+  margin: 0;
+  max-height: 0 !important;
+}
 .step.disappearing.hidden, span.disappearing.hidden {
   max-width: 0 !important;
   margin-left: 0;
@@ -152,6 +160,7 @@ th.disappearing.hidden, td.disappearing.hidden {
 
 section .stepsContainer .step span.code, span.disappearing {
   display: inline-block;
+  vertical-align: middle;
 }
 
 section .stepsContainer .step.visible span.code {
@@ -214,6 +223,8 @@ span.code {
   padding: 0.2em;
   vertical-align: middle;
   word-wrap: normal;
+  vertical-align: middle;
+  white-space: nowrap;
 }
 span.code.highlighted {
   background-color: rgba(240,200, 0, 0.6);

@@ -15,6 +15,7 @@ class Slide {
       }
 
       if (child.classList.contains('disappearing')) {
+        node.classList.add('unstretched');
         const style = child.getAttribute('style') || '';
         const oldStyle = node.getAttribute('style');
         node.setAttribute('style', 'display: block;');
@@ -24,6 +25,7 @@ class Slide {
           'style',
           `${style} max-width: ${width}px; max-height: ${height}px;`);
         node.setAttribute('style', oldStyle);
+        node.classList.remove('unstretched');
       }
     });
   }
